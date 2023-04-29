@@ -10,6 +10,7 @@ contract GovernanceToken is ERC20Votes {
     mapping (address => bool) s_hasClaimedToken; // check if token is claimed
     address[] public s_holders;
 
+    // percentage of token to be retained by the contract
     constructor(uint256 _keepPercentage )
         ERC20("AhmodToken","AM")
         ERC20Permit("AhmodToken")
@@ -24,8 +25,12 @@ contract GovernanceToken is ERC20Votes {
 
     function claimToken() external { // claim token for free
         require(!s_hasClaimedToken[msg.sender], "Token already claimed");
+        s_hasClaimedToken[msg.sender] = true;
+        _transfer(address(this),msg.sender,MAX_TOKEN_PER_USER *10 **18);
+        s_holders.push(msg.sender);
     }
 
+    
     
 
 }
