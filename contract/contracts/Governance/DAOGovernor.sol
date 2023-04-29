@@ -15,7 +15,7 @@ contract DAOGovernor is
     GovernorVotesQuorumFraction,
     GovernorTimelockControl
  {
-    uint256 s_proposalCount; // proposal count
+    uint256 public s_proposalCount; // proposal count
 
     constructor(
         IVotes _token,
@@ -34,7 +34,7 @@ contract DAOGovernor is
     GovernorVotesQuorumFraction(_quorumPercentage)
     GovernorTimelockControl(_timelock)
     {
-
+        s_proposalCount = 0;
     }
 
     // required overrides
