@@ -10,9 +10,14 @@ contract GovernanceToken is ERC20Votes {
     mapping (address => bool) s_hasClaimedToken; // check if token is claimed
     address[] public s_holders;
 
-    constructor(uint256 _keepPercentage){
+    constructor(uint256 _keepPercentage){ // percentage of token to be kept by the contract
         ERC20("AhmodToken","AM");
         ERC20Permit("AhmodToken");
     }
+
+    uint256 keepAmount = (TOTAL_SUPPLY * _keepPercentage) / 100 ; // keep amount
+    _mint(msg.sender,TOTAL_SUPPLY);
+    _transfer(msg.sender,address(this),TOTAL_SUPPLY - keepAmount);
+    s_holders.push(address);
 
 }
