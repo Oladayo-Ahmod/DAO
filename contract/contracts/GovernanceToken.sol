@@ -34,5 +34,28 @@ contract GovernanceToken is ERC20Votes {
         return s_holders.length;
     }
     
+    // Overrides required for Solidiy
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal override(ERC20Votes) {
+        super._afterTokenTransfer(from, to, amount);
+        emit TokenTransfered(from, to, amount);
+    }
+
+    function _mint(address to, uint256 amount) internal override(ERC20Votes) {
+        super._mint(to, amount);
+        emit TokenMinted(to, amount);
+    }
+
+    function _burn(address account, uint256 amount)
+        internal
+        override(ERC20Votes)
+    {
+        super._burn(account, amount);
+        emit TokenBurned(account, amount);
+    }
+
 
 }
