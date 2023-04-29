@@ -30,7 +30,9 @@ contract GovernanceToken is ERC20Votes {
         s_holders.push(msg.sender);
     }
 
-    
+    function getTokenHolders() external view returns(uint256) {
+        return s_holders;
+    }
     
 
 }
