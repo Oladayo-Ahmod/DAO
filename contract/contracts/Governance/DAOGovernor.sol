@@ -30,6 +30,9 @@ contract DAOGovernor is
         _votingPeriod,
         0
     )
+    GovernorVotes(_token)
+    GovernorVotesQuorumFraction(_quorumPercentage)
+    GovernorTimelockControl(_timelock)
     {
 
     }
