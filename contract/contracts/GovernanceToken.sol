@@ -1,9 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
-import "@openzeppelin/contracts/token/ERC20/Extensions/ERC20Votes.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 contract GovernanceToken is ERC20Votes {
     
+     // events for the governance token
+    event TokenTransfered(
+        address indexed from,
+        address indexed to,
+        uint256 amount
+    );
+
+    // Events
+    event TokenMinted(address indexed to, uint256 amount);
+    event TokenBurned(address indexed from, uint256 amount);
+
     uint256 constant MAX_TOKEN_PER_USER = 1000; //max token / user
     uint256 constant TOTAL_SUPPLY = 1000000 *10**18; // total supply to 18 decimals
 
@@ -11,6 +22,7 @@ contract GovernanceToken is ERC20Votes {
     address[] public s_holders;
 
     // percentage of token to be retained by the contract
+   
     constructor(uint256 _keepPercentage )
         ERC20("AhmodToken","AM")
         ERC20Permit("AhmodToken")
@@ -19,7 +31,7 @@ contract GovernanceToken is ERC20Votes {
         uint256 keepAmount = (TOTAL_SUPPLY * _keepPercentage) / 100 ; // keep amount
         _mint(msg.sender,TOTAL_SUPPLY);
         _transfer(msg.sender,address(this),TOTAL_SUPPLY - keepAmount);
-        s_holders.push(address);
+        s_holders.push(msg.sender);
 
     }
 
