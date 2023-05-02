@@ -51,6 +51,14 @@ describe("DAO", ()=>{
         })
     })
 
+    describe("DAO Governor", ()=>{
+
+        beforeEach(async()=>{
+            let provider = await ethers.getContractFactory("DAOGovernor")
+            BOX = await provider.deploy()
+        })
+    })
+
 
     
 })
