@@ -39,7 +39,7 @@ describe("DAO", ()=>{
 
         beforeEach(async()=>{
             let provider = await ethers.getContractFactory("Box")
-            BOX = await provider.deploy('10')
+            BOX = await provider.deploy()
         })
 
         it("only owner stores", async()=>{
