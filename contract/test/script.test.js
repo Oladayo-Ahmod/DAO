@@ -22,4 +22,13 @@ describe("DAO", async ()=>{
         const balance = await GOVERNORTOKEN.balanceOf(user.address)
         assert.equal(balance.toString(),ethers.utils.parseEther('1000'))
     })
+    it("gets total holder", async()=>{
+        await GOVERNORTOKEN.deployed()
+        const [,user1,user2,user3] = await ethers.getSigners()
+        await GOVERNORTOKEN.connect(user1).claimToken()
+        await GOVERNORTOKEN.connect(user2).claimToken()
+        await GOVERNORTOKEN.connect(user3).claimToken()
+        const holders = await GOVERNORTOKEN.getTokenHolders()
+        assert.equal(holders.toString(),'4')
+    })
 })
