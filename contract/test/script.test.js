@@ -54,9 +54,30 @@ describe("DAO", ()=>{
     describe("DAO Governor", ()=>{
 
         beforeEach(async()=>{
+            let GTprovider = await ethers.getContractFactory("GovernanceToken")
+            GOVERNORTOKEN = await GTprovider.deploy('10')
+            GOVERNORTOKEN = await GOVERNORTOKEN.address
             let provider = await ethers.getContractFactory("DAOGovernor")
-            BOX = await provider.deploy()
+            DAOGOVERNOR = await provider.deploy(
+                GOVERNORTOKEN,
+                ethers.constants.AddressZero,
+                0,
+                86400, // 1 day voting period
+                10 // 10% quorum
+            )
         })
+
+        it("deployed dao governor", async ()=>{
+            const address = await DAOGOVERNOR.deployed()
+            assert.notEqual(address,0x0)
+            assert.notEqual(address,undefined)
+            assert.notEqual(address,null)
+            assert.notEqual(address,'')
+        })
+
+        // it("", async ()=>{
+
+        // })
     })
 
 
