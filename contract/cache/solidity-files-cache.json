@@ -1077,8 +1077,8 @@
       ]
     },
     "C:\\xampp\\htdocs\\blockchain_projects\\dao\\contract\\contracts\\Governance\\DAOGovernor.sol": {
-      "lastModificationDate": 1682798220434,
-      "contentHash": "f6e7bc53d2986bc9fa21056ca2dffd50",
+      "lastModificationDate": 1683050371426,
+      "contentHash": "f6673261dbaa2eaa075c4b7ba801cc1d",
       "sourceName": "contracts/Governance/DAOGovernor.sol",
       "solcConfig": {
         "version": "0.8.9",

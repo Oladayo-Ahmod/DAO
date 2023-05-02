@@ -51,24 +51,19 @@ describe("DAO", ()=>{
         })
     })
 
-    describe("DAO Governor", ()=>{
+    describe("DAO Timelock", ()=>{
 
         beforeEach(async()=>{
-            let GTprovider = await ethers.getContractFactory("GovernanceToken")
-            GOVERNORTOKEN = await GTprovider.deploy('10')
-            GOVERNORTOKEN = await GOVERNORTOKEN.address
-            let provider = await ethers.getContractFactory("DAOGovernor")
-            DAOGOVERNOR = await provider.deploy(
-                GOVERNORTOKEN,
-                ethers.constants.AddressZero,
-                0,
-                86400, // 1 day voting period
-                10 // 10% quorum
-            )
+            const Timelock = await ethers.getContractFactory("Timelock");
+            const admin = await ethers.getSigner(0);
+            const proposers = [admin.address];
+            const executors = [admin.address];
+            const minDelay = 60 * 60 * 24; // 24 hours
+            TIMELOCK = await Timelock.deploy(minDelay, proposers, executors, admin.address);
         })
 
-        it("deployed dao governor", async ()=>{
-            const address = await DAOGOVERNOR.deployed()
+        it("deploys dao governor", async ()=>{
+            const address = await TIMELOCK.deployed()
             assert.notEqual(address,0x0)
             assert.notEqual(address,undefined)
             assert.notEqual(address,null)
