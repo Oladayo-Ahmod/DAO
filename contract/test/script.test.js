@@ -18,7 +18,8 @@ describe("DAO", async ()=>{
     })
     it("claims token", async ()=>{
         const user = await ethers.getSigner(1)
-        await GOVERNORTOKEN.connect.claimToken(user)
-        assert.equal(GOVERNORTOKEN.balanceOf(user.address),1000)
+        await GOVERNORTOKEN.connect(user).claimToken()
+        const balance = await GOVERNORTOKEN.balanceOf(user.address)
+        assert.equal(balance.toString(),ethers.utils.parseEther('1000'))
     })
 })
